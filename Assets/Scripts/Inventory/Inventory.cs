@@ -2,52 +2,93 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory
 {
-    [SerializeField]
     private string inventoryName;
-    [SerializeField]
     private Vector2Int inventorySize;
-    [SerializeField]
-    private InventorySlot slotPrefab;
-    [SerializeField]
     private Transform inventoryParent;
 
     private InventorySlot[][] inventorySlots;
 
-    private void Construct()
+    public void Construct(string name, Vector2Int size, Transform parent)
     {
+        inventoryName = name;
+        inventorySize = size;
+        inventoryParent = parent;
         inventorySlots = new InventorySlot[inventorySize.x][];
         for (int i = 0; i < inventorySize.x; i++)
         {
             inventorySlots[i] = new InventorySlot[inventorySize.y];
             for (int j = 0; j < inventorySize.y; j++)
             {
-                inventorySlots[i][j] = Instantiate(slotPrefab, inventoryParent);
+                inventorySlots[i][j] = HelpManager.Instance.SpawnPrefab(HelpManager.Instance.SlotPrefab, inventoryParent);
                 inventorySlots[i][j].Construct(i, j);
             }
         }
     }
 
-    public void AddItem()
+    public bool AddItem(ref InventoryItem item, Vector2Int slot)
     {
-
+        return inventorySlots[slot.x][slot.y].AddItem(item);
     }
 
-    public void RemoveItem()
+    public bool AddItem(ref InventoryItem item)
     {
-
+        if (!AddToStoredSlot(ref item))
+            if (!AddToFreeSlot(ref item))
+                return false;
+        return true;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private bool AddToStoredSlot(ref InventoryItem item)
     {
-        
+        bool isComplete = false;
+        for (int i = 0; i < inventorySize.x; i++)
+        {
+            for (int j = 0; j < inventorySize.y; j++)
+            {
+                if (inventorySlots[i][j].Item == item.Item && !inventorySlots[i][j].IsFullStack())
+                {
+                    int residue = inventorySlots[i][j].IncreaseItemSize(item.CurrentSize);
+                    if (residue > 0)
+                    {
+                        item.CurrentSize = residue;
+                    }
+                    else
+                    {
+                        isComplete = true;
+                        break;
+                    }
+                }
+            }
+            if (isComplete)
+                break;
+        }
+        return isComplete;
     }
 
-    // Update is called once per frame
-    void Update()
+    private bool AddToFreeSlot(ref InventoryItem item)
     {
-        
+        bool isComplete = false;
+        for (int i = 0; i < inventorySize.x; i++)
+        {
+            for (int j = 0; j < inventorySize.y; j++)
+            {
+                if (inventorySlots[i][j].Item == null)
+                {
+                    inventorySlots[i][j].AddItem(item);
+                    isComplete = true;
+                    break;
+                }
+            }
+            if (isComplete)
+                break;
+        }
+        return isComplete;
+    }
+
+    public void RemoveItem(Vector2Int slot)
+    {
+
     }
 }

@@ -6,9 +6,20 @@ using UnityEngine.UI;
 public class Item : ScriptableObject
 {
     public string Name;
-    public Image Icon;
+    public Sprite Icon;
     public string Description;
     public ItemType Type;
+}
+
+public class StackableItem : Item
+{
+    public int StackSize;
+}
+
+public class InventoryItem
+{
+    public int CurrentSize;
+    public StackableItem Item;
 }
 
 public enum ItemType
