@@ -17,6 +17,7 @@ public class InventorySlot : MonoBehaviour
 
     private InventoryItem item;
 
+    public InventoryItem InventoryItem { get { return item; } }
     public Item Item { get { return item != null ? item.Item : null; } }
     public void Construct(int x, int y)
     {
@@ -44,6 +45,11 @@ public class InventorySlot : MonoBehaviour
         }
         text.text = item.CurrentSize.ToString();
         return residue;
+    }
+
+    public int GetItemCount()
+    {
+        return item == null ? 0 : item.CurrentSize;
     }
 
     public bool IsFullStack()

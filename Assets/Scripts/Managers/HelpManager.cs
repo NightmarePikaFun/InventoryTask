@@ -6,9 +6,14 @@ public class HelpManager : MonoBehaviour
 {
     [SerializeField]
     public InventorySlot SlotPrefab;
+    [SerializeField]
+    private DescriptionView Description;
+    [SerializeField]
+    public DragModel DragModel;
 
     public static HelpManager Instance;
-    
+
+
     private void Awake()
     {
         if (Instance != null)
@@ -36,5 +41,15 @@ public class HelpManager : MonoBehaviour
     public InventorySlot SpawnPrefab(InventorySlot slot, Transform parent)
     {
         return Instantiate(slot, parent);
+    }
+
+    public void ShowDescription(InventorySlot slot)
+    {
+        Description.Show(slot);
+    }
+
+    public void HideDescription()
+    {
+        Description.Hide();
     }
 }
