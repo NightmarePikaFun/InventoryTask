@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemConfig : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class ItemConfig : MonoBehaviour
     private TMP_InputField Y;
     [SerializeField]
     private TMP_InputField itemCount;
+    [SerializeField]
+    private Toggle toggle;
 
     public Vector2Int GetSlot()
     {
@@ -21,4 +24,6 @@ public class ItemConfig : MonoBehaviour
     {
         return int.Parse(itemCount.text);
     }
+
+    public bool CanUseCount() => toggle.isOn;
 }
