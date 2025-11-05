@@ -135,8 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0a665ac4f91caa4fba5384ff5ca00f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 9003001410005049442}
-  text: {fileID: 2489408478896675766}
+  slotView: {fileID: -5703393201446205201}
   gridPosition: {x: 0, y: 0}
 --- !u!114 &-5703393201446205201
 MonoBehaviour:
@@ -151,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 9003001410005049442}
-  text: {fileID: 2489408478896675766}
+  itemCount: {fileID: 2489408478896675766}
   slot: {fileID: 4901756401197163573}
   slotButton: {fileID: 3858462625156243817}
 --- !u!1 &8339204380106052118

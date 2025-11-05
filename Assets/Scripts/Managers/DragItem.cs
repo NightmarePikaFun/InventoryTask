@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class DragItem : MonoBehaviour
@@ -10,9 +11,15 @@ public class DragItem : MonoBehaviour
     private Image itemIcon;
     [SerializeField]
     private TMP_Text itemCount;
+    [SerializeField]
+    private CanvasGroup group;
 
     private Camera camera;
+
     private bool canMove = false;
+    public bool IsMove { get { return canMove; } private set { canMove = value; } }
+    
+    private DragModel dragModel => HelpManager.Instance.DragModel;
 
     private void Awake()
     {
@@ -22,13 +29,14 @@ public class DragItem : MonoBehaviour
     public void ActivateObject(InventoryItem item)
     {
         Debug.Log("++");
+        group.alpha = 1;
         canMove = true;
         itemIcon.sprite = item.Item.Icon;
     }
 
-    public void DeactivateObject()
+    public void Hide()
     {
-        canMove = false;
+        group.alpha = 0;
     }
 
     void Update()
@@ -37,6 +45,11 @@ public class DragItem : MonoBehaviour
         {
             transform.position = Input.mousePosition;// camera.WorldToScreenPoint(Input.mousePosition);
             Debug.Log(Input.mousePosition);
+            if (Input.GetMouseButtonUp(0))
+            {
+                canMove = false;
+                dragModel.StoreItem();
+            }
         }
     }
 }

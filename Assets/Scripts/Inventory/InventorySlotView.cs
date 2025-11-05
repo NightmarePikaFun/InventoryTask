@@ -4,43 +4,44 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings.SplashScreen;
+using static UnityEditor.Progress;
 
 public class InventorySlotView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     [SerializeField]
     private Image image;
     [SerializeField]
-    private TMP_Text text;
+    private TMP_Text itemCount;
     [SerializeField]
     private InventorySlot slot;
     [SerializeField]
     private Button slotButton;
+
+    private HelpManager helpManager => HelpManager.Instance;
+    private DragModel dragModel => helpManager.DragModel;
 
     void Awake()
     {
         Debug.Log("Awake");
         //slotButton.onClick.AddListener(SelectItem);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        HelpManager.Instance.ShowDescription(slot);
+        if (dragModel.IsMove)
+            dragModel.SetNewSlot(slot);
+        else
+            helpManager.ShowDescription(slot);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        HelpManager.Instance.HideDescription();
+        if (dragModel.IsMove)
+            dragModel.RemoveNewSlot();
+        else
+            helpManager.HideDescription();
     }
 
     private void SelectItem()
@@ -49,7 +50,25 @@ public class InventorySlotView : MonoBehaviour, IPointerEnterHandler, IPointerEx
         if (slot.Item == null)
             return;
         Debug.Log("-");
-        HelpManager.Instance.DragModel.SetMovableItem(slot.InventoryItem, slot);
+        helpManager.HideDescription();
+        dragModel.SetMovableItem(slot.InventoryItem, slot);
+    }
+
+    public void ClearView()
+    {
+        image.sprite = null;//Old sprite slot
+        itemCount.text = "";
+    }
+
+    public void ShowView(InventoryItem item)
+    {
+        image.sprite = item.Item.Icon;
+        itemCount.text = item.CurrentSize.ToString();
+    }
+
+    public void UpdateCount(int value)
+    {
+        itemCount.text = value.ToString();
     }
 
     public void OnPointerDown(PointerEventData eventData)

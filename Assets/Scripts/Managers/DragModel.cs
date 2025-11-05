@@ -9,6 +9,10 @@ public class DragModel : MonoBehaviour
 
     public InventoryItem currentItem;
     public InventorySlot oldSlot;
+    public InventorySlot newSlot;
+
+    public bool IsMove => draggableItem.IsMove;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +27,39 @@ public class DragModel : MonoBehaviour
 
     public void SetMovableItem(InventoryItem item, InventorySlot slot)
     {
+        
         Debug.Log("+");
         currentItem = item;
         oldSlot = slot;
         draggableItem.ActivateObject(item);
+        oldSlot.RemoveItem();
+    }
+
+    public void StoreItem()
+    {
+        if(newSlot == null)
+        {
+            oldSlot.AddItem(currentItem);
+        }
+        else
+        {
+            newSlot.AddItem(currentItem);
+            oldSlot = null;
+        }
+        newSlot = null;
+        currentItem = null;
+        draggableItem.Hide();
+    }
+
+    public void SetNewSlot(InventorySlot slot)
+    {
+        if(IsMove)
+            newSlot = slot;
+    }
+
+    public void RemoveNewSlot()
+    {
+        if (IsMove)
+            newSlot = null;
     }
 }

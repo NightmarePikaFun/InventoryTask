@@ -8,12 +8,12 @@ public class InventorySlot : MonoBehaviour
 {
     //TODO tmp
     [SerializeField]
-    private Image image;
-    [SerializeField]
-    private TMP_Text text;
+    private InventorySlotView slotView;
+
 
     [SerializeField]
     private Vector2Int gridPosition;
+
 
     private InventoryItem item;
 
@@ -28,10 +28,16 @@ public class InventorySlot : MonoBehaviour
     {
         if (this.item != null)
             return false;
+        slotView.ShowView(item);
         this.item = item;
-        image.sprite = item.Item.Icon;
-        text.text = item.CurrentSize.ToString();
         return true;
+    }
+
+    public void RemoveItem()
+    {
+        this.item = null;
+        slotView.ClearView();
+        //Clear view
     }
 
     public int IncreaseItemSize(int value)
@@ -43,7 +49,7 @@ public class InventorySlot : MonoBehaviour
             residue = item.CurrentSize - item.Item.StackSize;
             item.CurrentSize = item.Item.StackSize;
         }
-        text.text = item.CurrentSize.ToString();
+        slotView.UpdateCount(item.CurrentSize);
         return residue;
     }
 
