@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "Item", menuName = "Item", order = 1)]
-
 public class Item : ScriptableObject
 {
     public string Name;
@@ -18,7 +16,7 @@ public class Item : ScriptableObject
     }
 }
 
-[CreateAssetMenu(fileName = "ItemStackable", menuName = "StackableItem", order = 2)]
+[CreateAssetMenu(fileName = "ItemStackable", menuName = "StackableItem", order = 1)]
 public class StackableItem : Item
 {
     public int StackSize;

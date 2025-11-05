@@ -12,6 +12,8 @@ public class InventorySlotView : MonoBehaviour, IPointerEnterHandler, IPointerEx
     [SerializeField]
     private Image image;
     [SerializeField]
+    private Sprite emptySprite;
+    [SerializeField]
     private TMP_Text itemCount;
     [SerializeField]
     private InventorySlot slot;
@@ -24,8 +26,7 @@ public class InventorySlotView : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     void Awake()
     {
-        Debug.Log("Awake");
-        //slotButton.onClick.AddListener(SelectItem);
+
     }
 
 
@@ -51,14 +52,13 @@ public class InventorySlotView : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         if (slot.Item == null)
             return;
-        Debug.Log("-");
         helpManager.HideDescription();
         dragModel.SetMovableItem(slot.InventoryItem, slot);
     }
 
     public void ClearView()
     {
-        image.sprite = null;//Old sprite slot
+        image.sprite = emptySprite;
         itemCount.text = "";
     }
 

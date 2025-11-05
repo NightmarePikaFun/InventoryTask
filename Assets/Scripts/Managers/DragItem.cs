@@ -31,6 +31,7 @@ public class DragItem : MonoBehaviour
         group.alpha = 1;
         canMove = true;
         itemIcon.sprite = item.Item.Icon;
+        itemCount.text = item.CurrentSize.ToString();
     }
 
     public void Hide()

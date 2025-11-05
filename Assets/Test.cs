@@ -9,15 +9,10 @@ public class Test : MonoBehaviour
     private GridLayoutGroup parent;
     [SerializeField]
     private Vector2Int inventorySize;
-    [SerializeField]
-    private Sprite icon;
 
     private Inventory inventory;
 
-    InventoryItem iItem = new InventoryItem();
 
-    [SerializeField]
-    private List<StackableItem> sItem;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +26,7 @@ public class Test : MonoBehaviour
         sItem.Icon = icon;
         sItem.Description = "Test description";*/
         
-        iItem.Item = sItem[0];
+        //iItem.Item = sItem[0];
         
 
     }
@@ -39,7 +34,7 @@ public class Test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        /*if(Input.GetKeyDown(KeyCode.A))
         {
             iItem = new InventoryItem();
             iItem.CurrentSize = 1;
@@ -69,18 +64,18 @@ public class Test : MonoBehaviour
             iItem.CurrentSize = 1;
             iItem.Item = sItem[0];
             Additem(iItem, new Vector2Int(0,0));
-        }
+        }*/
     }
 
-    private void Additem(InventoryItem item)
+    public void Additem(InventoryItem item)
     {
-        if (!inventory.AddItem(ref iItem))
-            Debug.Log("Can't sotre more items, item residue: " + iItem.CurrentSize);
+        if (!inventory.AddItem(ref item))
+            Debug.Log("Can't sotre more items, item residue: " + item.CurrentSize);
     }
 
-    private void Additem(InventoryItem item, Vector2Int slot)
+    public void Additem(InventoryItem item, Vector2Int slot)
     {
-        if (!inventory.AddItem(ref iItem, slot))
-            Debug.Log("Can't sotre more items, item residue: " + iItem.CurrentSize);
+        if (!inventory.AddItem(ref item, slot))
+            Debug.Log("Can't sotre more items, item residue: " + item.CurrentSize);
     }
 }

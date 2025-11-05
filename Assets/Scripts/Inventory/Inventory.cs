@@ -15,13 +15,14 @@ public class Inventory
         inventoryName = name;
         inventorySize = size;
         inventoryParent = parent;
-        inventorySlots = new InventorySlot[inventorySize.x][];
-        for (int i = 0; i < inventorySize.x; i++)
+        inventorySlots = new InventorySlot[inventorySize.y][];
+        for (int i = 0; i < inventorySize.y; i++)
         {
-            inventorySlots[i] = new InventorySlot[inventorySize.y];
-            for (int j = 0; j < inventorySize.y; j++)
+            inventorySlots[i] = new InventorySlot[inventorySize.x];
+            for (int j = 0; j < inventorySize.x; j++)
             {
                 inventorySlots[i][j] = HelpManager.Instance.SpawnPrefab(HelpManager.Instance.SlotPrefab, inventoryParent);
+                inventorySlots[i][j].name = i + "_" + j;
                 inventorySlots[i][j].Construct(i, j);
             }
         }
@@ -31,10 +32,10 @@ public class Inventory
     {
         bool isStored = false;
         int residue = 0;
-        isStored = inventorySlots[slot.x][slot.y].AddItem(item).Item1;
+        isStored = inventorySlots[slot.y][slot.x].AddItem(item).Item1;
         if (!isStored)
-            if (inventorySlots[slot.x][slot.y].Item == item.Item)
-                residue = inventorySlots[slot.x][slot.y].IncreaseItemSize(item.CurrentSize);
+            if (inventorySlots[slot.y][slot.x].Item == item.Item)
+                residue = inventorySlots[slot.y][slot.x].IncreaseItemSize(item.CurrentSize);
         return isStored && residue == 0;
     }
 
@@ -49,9 +50,9 @@ public class Inventory
     private bool AddToStoredSlot(ref InventoryItem item)
     {
         bool isComplete = false;
-        for (int i = 0; i < inventorySize.x; i++)
+        for (int i = 0; i < inventorySize.y; i++)
         {
-            for (int j = 0; j < inventorySize.y; j++)
+            for (int j = 0; j < inventorySize.x; j++)
             {
                 if (inventorySlots[i][j].Item == item.Item && !inventorySlots[i][j].IsFullStack())
                 {

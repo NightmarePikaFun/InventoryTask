@@ -74,6 +74,6 @@ public class InventorySlot : MonoBehaviour
 
     public bool IsFullStack()
     {
-        return item.CurrentSize == item.Item.StackSize;
+        return item != null ? item.CurrentSize == item.Item.StackSize : false;
     }
 }

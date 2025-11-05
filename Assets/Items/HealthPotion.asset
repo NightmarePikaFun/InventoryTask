@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Weapon
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponItem
-  Name: Pistol
-  Icon: {fileID: 21300000, guid: b17cf272fc8bbfd4e9838bee49bf1098, type: 3}
-  Description: Simple pistol with 9mm ammo
-  Type: 2
-  StackSize: 1
-  AmmoType: 9mm
+  m_Name: HealthPotion
+  m_EditorClassIdentifier: Assembly-CSharp::StackableItem
+  Name: Health potion
+  Icon: {fileID: 21300000, guid: 6f5d182fe4dd438429f620b837e4e91f, type: 3}
+  Description: Restore health
+  Type: 1
+  StackSize: 4
