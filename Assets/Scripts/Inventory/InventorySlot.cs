@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -24,13 +25,19 @@ public class InventorySlot : MonoBehaviour
         gridPosition = new Vector2Int(x, y);
     }
 
-    public bool AddItem(InventoryItem item)
+    public Tuple<bool,int> AddItem(InventoryItem item)
     {
         if (this.item != null)
-            return false;
+            if (this.item.Item == item.Item)
+            {
+                int outCount = IncreaseItemSize(item.CurrentSize);
+                return Tuple.Create(outCount == 0, outCount);
+            }
+            else
+                return Tuple.Create(false, item.CurrentSize);
         slotView.ShowView(item);
         this.item = item;
-        return true;
+        return Tuple.Create(true,0);
     }
 
     public void RemoveItem()
@@ -51,6 +58,13 @@ public class InventorySlot : MonoBehaviour
         }
         slotView.UpdateCount(item.CurrentSize);
         return residue;
+    }
+
+    public void UpdateState()
+    {
+        if (item.CurrentSize <= 0)
+            item = null;
+        slotView.ShowView(item);
     }
 
     public int GetItemCount()

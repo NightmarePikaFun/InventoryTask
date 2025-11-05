@@ -10,11 +10,9 @@ class DescriptionView : MonoBehaviour
     [SerializeField]
     private CanvasGroup group;
     [SerializeField]
-    private Text itemName;
+    private TMP_Text itemName;
     [SerializeField]
-    private Text itemDescription;
-    [SerializeField]
-    private Text itemCount;
+    private TMP_Text itemDescription;
     [SerializeField]
     private RectTransform descriptionTransform;
 
@@ -23,8 +21,8 @@ class DescriptionView : MonoBehaviour
         if (slot.Item == null)
             return;
         transform.position = new Vector3(slot.transform.position.x+ descriptionTransform.rect.width/2+5, slot.transform.position.y);
-        //itemName.text = slot.Item.Name;
-        //itemDescription.text = slot.Item.Description;
+        itemName.text = slot.Item.Name;
+        itemDescription.text = slot.Item.Description;
         //itemCount.text = slot.GetItemCount().ToString();
         group.alpha =  1.0f;
     }

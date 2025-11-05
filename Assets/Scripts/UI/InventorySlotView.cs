@@ -19,6 +19,7 @@ public class InventorySlotView : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private Button slotButton;
 
     private HelpManager helpManager => HelpManager.Instance;
+    private InventoryController inventoryController => helpManager.InventoryController;
     private DragModel dragModel => helpManager.DragModel;
 
     void Awake()
@@ -30,6 +31,7 @@ public class InventorySlotView : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        inventoryController.SetCurrentSlot(slot);
         if (dragModel.IsMove)
             dragModel.SetNewSlot(slot);
         else
@@ -38,6 +40,7 @@ public class InventorySlotView : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        inventoryController.ResetCurrentSlot();
         if (dragModel.IsMove)
             dragModel.RemoveNewSlot();
         else
@@ -46,7 +49,6 @@ public class InventorySlotView : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     private void SelectItem()
     {
-        Debug.Log(slot.Item);
         if (slot.Item == null)
             return;
         Debug.Log("-");
@@ -62,6 +64,11 @@ public class InventorySlotView : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void ShowView(InventoryItem item)
     {
+        if (item == null)
+        {
+            ClearView();
+            return;
+        }
         image.sprite = item.Item.Icon;
         itemCount.text = item.CurrentSize.ToString();
     }
@@ -73,6 +80,11 @@ public class InventorySlotView : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        SelectItem();
+        if (slot.Item == null)
+            return;
+        if (eventData.button == PointerEventData.InputButton.Left)
+            SelectItem();
+        else if (eventData.button == PointerEventData.InputButton.Right)
+            helpManager.ShowItemMenu();
     }
 }

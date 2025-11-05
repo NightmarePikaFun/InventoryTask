@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,7 +44,13 @@ public class DragModel : MonoBehaviour
         }
         else
         {
-            newSlot.AddItem(currentItem);
+            //TODO need ref
+            Tuple<bool, int> itemResult = newSlot.AddItem(currentItem);
+            if (!itemResult.Item1)
+            {
+                currentItem.CurrentSize = itemResult.Item2;
+                oldSlot.AddItem(currentItem);
+            }
             oldSlot = null;
         }
         newSlot = null;

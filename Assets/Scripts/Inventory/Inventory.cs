@@ -29,7 +29,13 @@ public class Inventory
 
     public bool AddItem(ref InventoryItem item, Vector2Int slot)
     {
-        return inventorySlots[slot.x][slot.y].AddItem(item);
+        bool isStored = false;
+        int residue = 0;
+        isStored = inventorySlots[slot.x][slot.y].AddItem(item).Item1;
+        if (!isStored)
+            if (inventorySlots[slot.x][slot.y].Item == item.Item)
+                residue = inventorySlots[slot.x][slot.y].IncreaseItemSize(item.CurrentSize);
+        return isStored && residue == 0;
     }
 
     public bool AddItem(ref InventoryItem item)

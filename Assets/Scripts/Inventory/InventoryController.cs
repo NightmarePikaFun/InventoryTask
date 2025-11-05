@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryController : MonoBehaviour
+public class InventoryController
 {
     private Item currentItem;
     private InventorySlot currentInventorySlot;
+
+    public Transform slotTransform { get { return currentInventorySlot?.transform; } private set { } }
 
     public void SetCurrentItem(Item item)
     {
@@ -17,20 +19,30 @@ public class InventoryController : MonoBehaviour
         currentInventorySlot = slot;
     }
 
+    public void ResetCurrentSlot()
+    {
+        //currentInventorySlot = null;
+    }
+
     public void ResetCurrentItem()
     {
         currentItem = null;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateSlotView()
     {
-        
+        currentInventorySlot.UpdateState();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UseItem()
     {
-        
+        currentInventorySlot.InventoryItem.UseItem();
+        UpdateSlotView();
+    }
+
+    public void RemoveItem()
+    {
+        Debug.Log("Item " + currentInventorySlot.Item.Name + " destroyed!");
+        currentInventorySlot.RemoveItem();
     }
 }

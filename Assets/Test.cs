@@ -15,7 +15,9 @@ public class Test : MonoBehaviour
     private Inventory inventory;
 
     InventoryItem iItem = new InventoryItem();
-    StackableItem sItem;
+
+    [SerializeField]
+    private List<StackableItem> sItem;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +25,13 @@ public class Test : MonoBehaviour
         parent.constraintCount = inventorySize.x;
         inventory.Construct("Test", inventorySize, parent.transform);
 
-        sItem = new StackableItem();
-        sItem.name = "Test";
+        /*sItem = new StackableItem();
+        sItem.Name = "Test";
         sItem.StackSize = 4;
         sItem.Icon = icon;
+        sItem.Description = "Test description";*/
         
-        iItem.Item = sItem;
+        iItem.Item = sItem[0];
         
 
     }
@@ -40,7 +43,7 @@ public class Test : MonoBehaviour
         {
             iItem = new InventoryItem();
             iItem.CurrentSize = 1;
-            iItem.Item = sItem;
+            iItem.Item = sItem[0];
             Additem(iItem);
         }
         if (Input.GetKeyDown(KeyCode.S))
@@ -48,7 +51,7 @@ public class Test : MonoBehaviour
 
             iItem = new InventoryItem();
             iItem.CurrentSize = 2;
-            iItem.Item = sItem;
+            iItem.Item = sItem[0];
             Additem(iItem);
         }
         if (Input.GetKeyDown(KeyCode.D))
@@ -56,14 +59,28 @@ public class Test : MonoBehaviour
 
             iItem = new InventoryItem();
             iItem.CurrentSize = 3;
-            iItem.Item = sItem;
+            iItem.Item = sItem[0];
             Additem(iItem);
+        }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+
+            iItem = new InventoryItem();
+            iItem.CurrentSize = 1;
+            iItem.Item = sItem[0];
+            Additem(iItem, new Vector2Int(0,0));
         }
     }
 
     private void Additem(InventoryItem item)
     {
         if (!inventory.AddItem(ref iItem))
+            Debug.Log("Can't sotre more items, item residue: " + iItem.CurrentSize);
+    }
+
+    private void Additem(InventoryItem item, Vector2Int slot)
+    {
+        if (!inventory.AddItem(ref iItem, slot))
             Debug.Log("Can't sotre more items, item residue: " + iItem.CurrentSize);
     }
 }

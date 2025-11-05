@@ -28,7 +28,6 @@ public class DragItem : MonoBehaviour
 
     public void ActivateObject(InventoryItem item)
     {
-        Debug.Log("++");
         group.alpha = 1;
         canMove = true;
         itemIcon.sprite = item.Item.Icon;
@@ -44,7 +43,6 @@ public class DragItem : MonoBehaviour
         if(canMove)
         {
             transform.position = Input.mousePosition;// camera.WorldToScreenPoint(Input.mousePosition);
-            Debug.Log(Input.mousePosition);
             if (Input.GetMouseButtonUp(0))
             {
                 canMove = false;
