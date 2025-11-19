@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: eacaca4c1898fae45bb062d05d4ad4cc, type: 3}
   m_Name: Potato
-  m_EditorClassIdentifier: Assembly-CSharp::StackableItem
+  m_EditorClassIdentifier: 
   Name: Potato
-  Icon: {fileID: 21300000, guid: 433ed543d7934fc47a1639dfcc9f6b1d, type: 3}
-  Description: Potato!
+  Icon: {fileID: 21300000, guid: 6f5d182fe4dd438429f620b837e4e91f, type: 3}
+  Description: PoTaTo
   Type: 3
-  StackSize: 16
+  StackSize: 32

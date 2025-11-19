@@ -16,29 +16,7 @@ public class Item : ScriptableObject
     }
 }
 
-[CreateAssetMenu(fileName = "ItemStackable", menuName = "StackableItem", order = 1)]
-public class StackableItem : Item
-{
-    public int StackSize;
 
-    public override void UseItem()
-    {
-        Debug.Log("Use "+ Name);
-    }
-}
-
-[CreateAssetMenu(fileName = "WeaponItem", menuName = "Weapon", order = 2)]
-public class WeaponItem : StackableItem
-{
-    public readonly int StackSize = 1;
-
-    public string AmmoType;//TODO it will be enum
-
-    public override void UseItem()
-    {
-        Debug.Log("Equip " + Name);
-    }
-}
 
 public class InventoryItem
 {

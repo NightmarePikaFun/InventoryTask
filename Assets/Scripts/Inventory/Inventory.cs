@@ -77,9 +77,9 @@ public class Inventory
     private bool AddToFreeSlot(ref InventoryItem item)
     {
         bool isComplete = false;
-        for (int i = 0; i < inventorySize.x; i++)
+        for (int i = 0; i < inventorySize.y; i++)
         {
-            for (int j = 0; j < inventorySize.y; j++)
+            for (int j = 0; j < inventorySize.x; j++)
             {
                 if (inventorySlots[i][j].Item == null)
                 {

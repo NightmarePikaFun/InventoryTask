@@ -1206,7 +1206,7 @@ MonoBehaviour:
   itemName: {fileID: 606547069}
   spawnItem: {fileID: 602176062}
   spawnItemInSlot: {fileID: 1598884830}
-  item: {fileID: 11400000, guid: 8b9a301a553a8b4479b04919b95ae455, type: 2}
+  item: {fileID: 11400000, guid: a7c4196d9869e4e40941ff235791b197, type: 2}
 --- !u!114 &327405771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1753,7 +1753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 936805719}
-  inventorySize: {x: 6, y: 4}
+  inventorySize: {x: 10, y: 1}
 --- !u!4 &506177395
 Transform:
   m_ObjectHideFlags: 0
@@ -4963,7 +4963,7 @@ MonoBehaviour:
   itemName: {fileID: 20697047}
   spawnItem: {fileID: 959804111}
   spawnItemInSlot: {fileID: 1133621426}
-  item: {fileID: 11400000, guid: a7c4196d9869e4e40941ff235791b197, type: 2}
+  item: {fileID: 11400000, guid: bfbf762a3fce76f43b8e2b2450682c8f, type: 2}
 --- !u!114 &1331817333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6249,7 +6249,7 @@ MonoBehaviour:
   itemName: {fileID: 602934062}
   spawnItem: {fileID: 1783328526}
   spawnItemInSlot: {fileID: 167361144}
-  item: {fileID: 11400000, guid: 3a0b9856189041a4f9d06e0faca8e51e, type: 2}
+  item: {fileID: 11400000, guid: a7c4196d9869e4e40941ff235791b197, type: 2}
 --- !u!114 &1689571802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6682,7 +6682,7 @@ MonoBehaviour:
   itemName: {fileID: 2136996304}
   spawnItem: {fileID: 1140417352}
   spawnItemInSlot: {fileID: 1395148092}
-  item: {fileID: 11400000, guid: d44599063649a9f4b9f86b4cabd436b2, type: 2}
+  item: {fileID: 11400000, guid: bfbf762a3fce76f43b8e2b2450682c8f, type: 2}
 --- !u!114 &1859084941
 MonoBehaviour:
   m_ObjectHideFlags: 0

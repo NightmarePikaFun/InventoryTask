@@ -44,7 +44,6 @@ public class DragModel : MonoBehaviour
         }
         else
         {
-            //TODO need ref
             Tuple<bool, int> itemResult = newSlot.AddItem(currentItem);
             if (!itemResult.Item1)
             {
